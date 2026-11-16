@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Moobilia web development project report (print source of the PDF).">
+<title>Moobilia – Web Development Project Report</title>
+<!--
+  PROJECT REPORT (source file)
+  ------------------------------------------------------------------
+  • Edit the text below (names, teacher, school, links are marked [ ... ]).
+  • To regenerate the PDF: open this file in Chrome → Print → "Save as PDF"
+    (paper A4, margins "Default", tick "Background graphics").
+  • Fonts and images are loaded from ../assets, so keep this file in /docs.
+-->
+<style>
+@font-face{font-family:"Gilroy-Bold";src:url("../assets/fonts/Gilroy-Bold.woff") format("woff")}
+@font-face{font-family:"Gilroy-Medium";src:url("../assets/fonts/Gilroy-Medium.woff") format("woff")}
+@font-face{font-family:"Gilroy-Regular";src:url("../assets/fonts/Gilroy-Regular.woff") format("woff")}
+:root{--orange:#e58411;--soft:#f6973f;--navy:#0d1b39;--ink:#1e1e1e;--body:rgba(30,30,30,.82);--grey:#f7f7f7;
+  --b:"Gilroy-Bold",Arial,sans-serif;--m:"Gilroy-Medium",Arial,sans-serif;--r:"Gilroy-Regular",Arial,sans-serif}
+*{box-sizing:border-box}
+@page{size:A4;margin:18mm 17mm 20mm}
+@page:first{margin:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;font:11pt/1.65 var(--r);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p,ul,ol{margin:0}
+
+/* ---------- cover ---------- */
+.cover{height:297mm;padding:26mm 22mm;color:#fff;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(160deg,var(--navy) 0%,#142a55 55%,#1d3a73 100%);break-after:page;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;right:-60mm;bottom:-60mm;width:170mm;height:170mm;border-radius:50%;
+  background:radial-gradient(circle,var(--orange) 0%,rgba(229,132,17,0) 68%);opacity:.85}
+.cover>*{position:relative;z-index:1}
+.brand{font:28pt var(--b)}
+.kicker{font:12pt var(--b);letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.cover h1{font:44pt/1.05 var(--b);margin:8mm 0 6mm}
+.cover h1 span{color:var(--orange)}
+.cover .sub{font:16pt/1.4 var(--m);max-width:130mm;opacity:.95}
+.meta{display:grid;grid-template-columns:repeat(2,1fr);gap:6mm 10mm;max-width:140mm}
+.meta small{display:block;font:9pt var(--m);letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.meta b{color:#fff;display:block;font:13pt var(--b);font-weight:400;margin-top:1mm}
+
+/* ---------- contents ---------- */
+h2{font:22pt/1.25 var(--b);font-weight:400;margin:0 0 5mm;padding-top:2mm;break-after:avoid}
+h2 .n{color:var(--orange);margin-right:3mm}
+h3{font:13.5pt/1.3 var(--b);font-weight:400;margin:7mm 0 2.5mm;break-after:avoid}
+.eyebrow{display:block;font:9.5pt var(--b);letter-spacing:.17em;text-transform:uppercase;color:var(--orange);margin-bottom:1mm}
+section{break-inside:auto;margin-bottom:11mm}
+p{margin:0 0 3mm;color:var(--body)}
+ul,ol{padding-left:5.5mm;color:var(--body)}li{margin:0 0 1.5mm}
+b,strong{font-family:var(--b);font-weight:400;color:var(--ink)}
+.toc{columns:2;column-gap:12mm;list-style:none;padding:0;counter-reset:t}
+.toc li{counter-increment:t;margin:0 0 2.2mm;break-inside:avoid;font:11.5pt var(--m);color:var(--ink)}
+.toc li::before{content:counter(t,decimal-leading-zero) "  ";color:var(--orange);font-family:var(--b)}
+.page-break{break-before:page}
+
+table{width:100%;border-collapse:collapse;margin:3mm 0 5mm;font-size:10pt;break-inside:avoid}
+th{background:var(--navy);color:#fff;font:9.5pt var(--m);text-align:left;padding:2.2mm 3mm;letter-spacing:.04em}
+td{padding:2.2mm 3mm;border-bottom:.3mm solid #e8e8e8;vertical-align:top;color:var(--body)}
+tr:nth-child(even) td{background:var(--grey)}
+td:first-child{color:var(--ink);font-family:var(--m)}
+.sw{display:inline-block;width:4mm;height:4mm;border-radius:1mm;vertical-align:-.7mm;margin-right:2mm;border:.2mm solid rgba(0,0,0,.15)}
+
+pre{margin:3mm 0 5mm;padding:4mm 5mm;border-radius:2.5mm;background:var(--navy);color:#e9edf7;font:8.6pt/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;break-inside:avoid}
+pre i{font-style:normal;color:#8da0c4}
+code{font:9pt ui-monospace,Menlo,Consolas,monospace;background:#fdf1e2;color:#a85b00;padding:.2mm 1.2mm;border-radius:1mm}
+.cap{font:9pt var(--m);color:#777;margin:-3mm 0 5mm}
+.callout{border-left:1.2mm solid var(--orange);background:#fdf6ec;padding:3.5mm 5mm;border-radius:0 2mm 2mm 0;margin:4mm 0;break-inside:avoid}
+.callout p{margin:0;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin:4mm 0 6mm}
+.stat{background:var(--grey);border-radius:3mm;padding:4mm 2mm;text-align:center;break-inside:avoid}
+.stat b{display:block;font:20pt var(--b);color:var(--orange)}
+.stat span{font:8.8pt var(--m);color:var(--body)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm;margin:3mm 0 5mm;counter-reset:s}
+.step{background:var(--grey);border-radius:3mm;padding:4mm;break-inside:avoid}
+.step::before{counter-increment:s;content:"0" counter(s);font:16pt var(--b);color:var(--orange);display:block}
+.step b{display:block;margin:1mm 0}
+.step span{font-size:9.6pt;color:var(--body);line-height:1.5}
+.fig{margin:4mm 0 6mm;break-inside:avoid}
+.fig svg{width:100%;height:auto;display:block}
+.tree{font:9pt/1.6 ui-monospace,Menlo,Consolas,monospace}
+.tree em{font-style:normal;color:var(--soft)}
+.note{font-size:9.5pt;color:#777}
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<div class="cover">
+  <div class="brand">Moobilia</div>
+  <div>
+    <div class="kicker">Final project report</div>
+    <h1>Sleek &amp; <span>Contemporary</span><br>Furniture Website</h1>
+    <p class="sub" style="color:#fff">Detailed report on the development steps, the choices made and the techniques used.</p>
+  </div>
+  <div class="meta">
+    <div><small>Module</small><b>Web Development</b></div>
+    <div><small>Teacher</small><b>[ Teacher name ]</b></div>
+    <div><small>Authors</small><b>[ Your name ] · [ Colleague 1 ] · [ Colleague 2 ]</b></div>
+    <div><small>School / Year</small><b>[ School name ] · 2026 / 2027</b></div>
+    <div><small>Source code</small><b>[ github.com/your-username/your-repo ]</b></div>
+    <div><small>Live website</small><b>[ your-username.github.io/your-repo ]</b></div>
+  </div>
+</div>
+
+<!-- ============================ CONTENTS ============================ -->
+<section>
+  <span class="eyebrow">Contents</span>
+  <h2>Table of contents</h2>
+  <ol class="toc">
+    <li>Introduction and objectives</li>
+    <li>Project overview</li>
+    <li>Design choices</li>
+    <li>Technologies and tools</li>
+    <li>Development process</li>
+    <li>Code organisation and conventions</li>
+    <li>Key technical solutions</li>
+    <li>Responsive design and accessibility</li>
+    <li>Testing and compatibility</li>
+    <li>Performance, SEO and sharing</li>
+    <li>Deployment on GitHub Pages</li>
+    <li>Challenges and solutions</li>
+    <li>Conclusion and future work</li>
+    <li>References</li>
+  </ol>
+</section>
+
+<!-- ============================ 1 ============================ -->
+<section>
+  <h2><span class="n">01</span>Introduction and objectives</h2>
+  <p>Moobilia is a responsive furniture-store website built from scratch with <b>HTML and CSS only</b>. It is the final exam project of the Web Development module: a complete multi-page website that reproduces a professional UI design, with every interaction written in pure CSS and published online with GitHub Pages.</p>
+  <p>The project had four objectives:</p>
+  <ul>
+    <li>Build a faithful, pixel-careful implementation of the design on desktop, tablet and phone.</li>
+    <li>Implement all interactions (category tabs, carousels, sticky header, burger menu, scrollbars, add-to-cart buttons) <b>without JavaScript</b>.</li>
+    <li>Write clean, well-structured and commented code, with one shared stylesheet for all pages.</li>
+    <li>Document the development steps, the choices made and the techniques used (this report).</li>
+  </ul>
+  <div class="stats">
+    <div class="stat"><b>5</b><span>HTML pages</span></div>
+    <div class="stat"><b>1</b><span>shared stylesheet</span></div>
+    <div class="stat"><b>0</b><span>lines of JavaScript</span></div>
+    <div class="stat"><b>5</b><span>responsive breakpoints</span></div>
+  </div>
+</section>
+
+<!-- ============================ 2 ============================ -->
+<section>
+  <h2><span class="n">02</span>Project overview</h2>
+  <p>The website has a home page and four secondary pages. All pages share the same header, the same footer and the same stylesheet.</p>
+  <div class="fig">
+    <svg viewBox="0 0 700 250" role="img" aria-label="Site map: home page links to four secondary pages">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0d1b39"/></marker></defs>
+      <rect x="250" y="14" width="200" height="52" rx="12" fill="#e58411"/>
+      <text x="350" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Arial">index.html (Home)</text>
+      <g fill="none" stroke="#0d1b39" stroke-width="1.4" marker-end="url(#ar)">
+        <path d="M290 66 V100 H100 V150"/><path d="M330 66 V100 H275 V150"/><path d="M370 66 V100 H450 V150"/><path d="M410 66 V100 H610 V150"/>
+      </g>
+      <g font-family="Arial" font-size="12.5" text-anchor="middle" fill="#0d1b39">
+        <rect x="14" y="150" width="172" height="58" rx="10" fill="#f7f7f7" stroke="#0d1b39"/><text x="100" y="175" font-weight="700">more-info-</text><text x="100" y="193" font-weight="700">Luxury-facilities</text>
+        <rect x="189" y="150" width="172" height="58" rx="10" fill="#f7f7f7" stroke="#0d1b39"/><text x="275" y="175" font-weight="700">more-info-</text><text x="275" y="193" font-weight="700">Affordable-Price</text>
+        <rect x="364" y="150" width="172" height="58" rx="10" fill="#f7f7f7" stroke="#0d1b39"/><text x="450" y="175" font-weight="700">more-info-</text><text x="450" y="193" font-weight="700">Many-Choices</text>
+        <rect x="539" y="150" width="147" height="58" rx="10" fill="#f7f7f7" stroke="#0d1b39"/><text x="612" y="184" font-weight="700">view-all</text>
+      </g>
+      <text x="350" y="236" text-anchor="middle" font-size="11.5" fill="#777" font-family="Arial">Shared by every page: header (nav + cart) · footer · styles.css · custom scrollbar</text>
+    </svg>
+  </div>
+  <p class="cap">Figure 1 – Site map. The "More info" links of the home page lead to the three "Why pick us" pages; product cards and "Browse All" lead to the full catalogue.</p>
+
+  <h3>Home page sections</h3>
+  <table>
+    <tr><th style="width:26%">Section</th><th>Content</th></tr>
+    <tr><td>Header</td><td>Brand, menu (Furnishings, Store, About, Reach Us), cart icon with counter. Transparent over the hero, white and compact after scrolling; burger menu on small screens.</td></tr>
+    <tr><td>Hero</td><td>Full-width photo, headline "Make your room feel sleek &amp; contemporary", frosted-glass search bar and pulsing hotspots on the furniture.</td></tr>
+    <tr><td>Why pick us</td><td>Three value blocks (luxury facilities, affordable price, many choices), each with a "More info" link to its own page.</td></tr>
+    <tr><td>Top-selling products</td><td>Category tabs (Seating, Bedroom, Lounge, Lighting) and a scroll-snap one carousel per tab (5 chairs, 2 beds, 2 sofas) with rating, price and add-to-cart button; the Lighting tab shows a "coming soon" message; "Browse All" link.</td></tr>
+    <tr><td>Experience &amp; Materials</td><td>Two mirrored feature blocks with image compositions, blurred glows and text.</td></tr>
+    <tr><td>Client reviews</td><td>Carousel of three testimonial cards (photo, name, role, text, 5 stars).</td></tr>
+    <tr><td>Footer</td><td>About text, link columns, social icons, legal links and a download link for this report.</td></tr>
+  </table>
+
+  <h3>Secondary pages</h3>
+  <table>
+    <tr><th style="width:30%">Page</th><th>Content</th></tr>
+    <tr><td>Luxury facilities</td><td>Hero with photo, statistics band, three numbered cards, quote and call-to-action band.</td></tr>
+    <tr><td>Affordable price</td><td>Same structure, different content and statistics.</td></tr>
+    <tr><td>Many choices</td><td>Same structure with a 2×2 gallery of four chairs instead of the single photo.</td></tr>
+    <tr><td>View all</td><td>Introduction, grid of the same nine product cards as the home page (4 / 3 / 2 / 1 columns depending on the screen), statistics band and call-to-action band.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 3 ============================ -->
+<section class="page-break">
+  <h2><span class="n">03</span>Design choices</h2>
+  <p>The identity is minimal and calm: white pages, dark text and one strong orange accent, so the furniture photographs remain the focus.</p>
+  <table>
+    <tr><th style="width:24%">Token</th><th style="width:20%">Value</th><th>Use</th></tr>
+    <tr><td><span class="sw" style="background:#e58411"></span>Orange</td><td>#e58411</td><td>Accent: labels, links, buttons, scrollbars</td></tr>
+    <tr><td><span class="sw" style="background:#f6973f"></span>Soft orange</td><td>#f6973f</td><td>Hover states, footer column titles</td></tr>
+    <tr><td><span class="sw" style="background:#0d1b39"></span>Navy</td><td>#0d1b39</td><td>Product names, prices, call-to-action bands</td></tr>
+    <tr><td><span class="sw" style="background:#1e1e1e"></span>Ink</td><td>#1e1e1e</td><td>Main text and headings</td></tr>
+    <tr><td><span class="sw" style="background:#f7f7f7"></span>Light grey</td><td>#f7f7f7</td><td>Section and card backgrounds</td></tr>
+  </table>
+  <ul>
+    <li><b>Typography:</b> Gilroy Bold / Medium / Regular, loaded locally with <code>@font-face</code> (<code>font-display: swap</code> avoids invisible text); Inter and DM Sans from Google Fonts for product cards and the footer.</li>
+    <li><b>Design tokens:</b> colours, fonts, gutters and scrollbar sizes are CSS custom properties declared once in <code>:root</code>. Changing the theme means editing one block.</li>
+    <li><b>Layout:</b> CSS Grid for page layouts (header, "Why pick us", feature sections, statistics, product grid, footer); Flexbox for rows and carousels.</li>
+    <li><b>Depth:</b> rounded corners, soft shadows, <code>backdrop-filter</code> blur (frosted glass) and blurred copies of photos used as colour glows.</li>
+  </ul>
+</section>
+
+<!-- ============================ 4 ============================ -->
+<section>
+  <h2><span class="n">04</span>Technologies and tools</h2>
+  <table>
+    <tr><th style="width:30%">Technology</th><th>Why it was used</th></tr>
+    <tr><td>HTML5</td><td>Semantic structure (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>footer</code>), accessible labels and alt texts.</td></tr>
+    <tr><td>CSS3</td><td>Variables, Grid, Flexbox, gradients, blur, shadows, <code>aspect-ratio</code>, <code>clamp()</code>.</td></tr>
+    <tr><td>CSS scroll-driven animations</td><td><code>animation-timeline: scroll()</code> and <code>timeline-scope</code> for the sticky header and the custom scrollbars.</td></tr>
+    <tr><td>Modern selectors</td><td><code>:has()</code> and <code>:checked</code> for tabs and the menu without JavaScript.</td></tr>
+    <tr><td>Scroll snap</td><td><code>scroll-snap-type</code> keeps carousel cards aligned.</td></tr>
+    <tr><td>Git and GitHub Pages</td><td>Version control and free online hosting.</td></tr>
+    <tr><td>Visual Studio Code</td><td>Code editor.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 5 ============================ -->
+<section>
+  <h2><span class="n">05</span>Development process</h2>
+  <p>The work followed six phases, from analysis to publication.</p>
+  <div class="steps">
+    <div class="step"><b>Analysis</b><span>Study the design, list pages, sections, colours, fonts and interactions.</span></div>
+    <div class="step"><b>Structure</b><span>Write the semantic HTML of the home page, then of the four secondary pages.</span></div>
+    <div class="step"><b>Styling</b><span>Build the CSS: tokens, layout, typography, cards and effects.</span></div>
+    <div class="step"><b>Interactions</b><span>Tabs, carousels, burger menu, add-to-cart buttons, sticky header and scrollbars in pure CSS.</span></div>
+    <div class="step"><b>Unification</b><span>Merge the four page stylesheets into <code>styles.css</code> and reuse the same header and footer everywhere.</span></div>
+    <div class="step"><b>Test &amp; publish</b><span>Check three screen sizes, fix issues, add SEO / sharing tags, push to GitHub and enable Pages.</span></div>
+  </div>
+  <div class="callout"><p><b>Unification step in detail.</b> The secondary pages first had their own <code>style.css</code> and a simplified header and footer. They were merged into one stylesheet (a dedicated "secondary pages" section), the duplicated rules were removed, and the pages now use exactly the same <code>.site-header</code> and <code>.footer</code> markup and classes as the home page. Only one modifier class was added, <code>.is-solid</code>, because these pages have no dark hero behind the header.</p></div>
+</section>
+
+<!-- ============================ 6 ============================ -->
+<section class="page-break">
+  <h2><span class="n">06</span>Code organisation and conventions</h2>
+  <pre class="tree"><em>Moobilia/</em>
+├── index.html              → home page
+├── styles.css              → the ONLY stylesheet (all pages)
+├── favicon-*.png, .ico, .svg, apple-touch-icon.png
+├── docs/
+│   └── Moobilia-Project-Report.pdf   → this report
+├── pages/
+│   ├── more-info-Luxury-facilities/index.html
+│   ├── more-info-Affordable-Price/index.html
+│   ├── more-info-Many-Choices/index.html
+│   └── view-all/index.html
+└── assets/
+    ├── fonts/              → Gilroy Bold · Medium · Regular
+    └── *.svg, *.png, *.jpg → icons, photos, product images</pre>
+  <h3>How <code>styles.css</code> is organised</h3>
+  <p>The file is split into clearly labelled sections, in the order of the page: fonts → variables → scrollbar → base → header → hero → why → shop → carousel → product card → features → testimonials → footer → secondary pages → responsive rules → accessibility.</p>
+  <h3>Conventions</h3>
+  <ul>
+    <li>Short, descriptive class names with prefixes by component (<code>pcard-*</code> product card, <code>tcard-*</code> testimonial card, <code>f-*</code> footer).</li>
+    <li>Every section starts with a banner comment; non-obvious techniques have a short explanation next to the rule.</li>
+    <li>No duplicated rules: shared components (buttons, cards, header, footer) are defined once. The <b>same product card (<code>.pcard</code>)</b> is used in the home carousels and in the catalogue grid of the "view-all" page.</li>
+    <li>HTML pages use the same landmark structure and the same comments (<code>EN-TÊTE</code>, <code>PIED DE PAGE</code> …).</li>
+    <li>Relative paths only, so the site works from any folder or from GitHub Pages.</li>
+  </ul>
+</section>
+
+<!-- ============================ 7 ============================ -->
+<section>
+  <h2><span class="n">07</span>Key technical solutions</h2>
+  <p>This chapter explains the main techniques. All of them work without a single line of JavaScript.</p>
+
+  <h3>7.1 Category tabs with <code>:has()</code></h3>
+  <p>Each tab is a hidden radio button plus a styled label. The <code>:has()</code> selector lets the whole section react to the checked radio, so the product carousel is replaced by a message for categories without products yet.</p>
+<pre><i>&lt;!-- HTML --&gt;</i>
+&lt;input class="tab-radio" type="radio" name="cat" id="t-beds"&gt;
+&lt;label class="tab" for="t-beds"&gt;Bedroom&lt;/label&gt;
+
+<i>/* CSS */</i>
+.shop:has(#t-beds:checked) .shop-carousel { display: none; }
+.shop:has(#t-beds:checked) .shop-empty    { display: block; }</pre>
+
+  <h3>7.2 Header that changes while scrolling</h3>
+  <p>A scroll-driven animation is tied to the page scroll position. During the first 140&nbsp;px the header turns white and shrinks. Browsers without support keep the transparent header, so nothing breaks.</p>
+<pre>@supports (animation-timeline: scroll()) {
+  .site-header { position: fixed; animation: hdr linear both;
+                 animation-timeline: scroll(root); animation-range: 0 140px; }
+  @keyframes hdr { to { background: rgba(255,255,255,.96); color: #1e1e1e; } }
+}</pre>
+
+  <h3>7.3 Custom overlay scrollbar</h3>
+  <p>The native scrollbar is hidden and replaced by an orange pill drawn with <code>body::after</code>. The same scroll timeline moves it from top to bottom, so it always shows the scroll position and does not take any page width.</p>
+<pre>html { scrollbar-width: none; }            <i>/* hide native bar */</i>
+body::after { content: ""; position: fixed; right: 6px; width: 10px; height: 140px;
+  border-radius: 999px; background: #e58411; pointer-events: none;
+  animation: sb-move linear both; animation-timeline: scroll(root); }
+@keyframes sb-move { from { transform: translateY(8px); }
+  to { transform: translateY(calc(100dvh - 140px - 8px)); } }</pre>
+
+  <h3>7.4 Carousels with scroll-snap and a progress bar</h3>
+  <p>The track is a horizontal flex row. <code>scroll-snap</code> aligns the cards; <code>scroll-timeline</code> on the track and <code>timeline-scope</code> on its parent let a bar under the carousel follow the horizontal scroll.</p>
+<pre>.carousel { position: relative; timeline-scope: --trk; }
+.track    { display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+            scroll-timeline: --trk x; scrollbar-width: none; }
+.carousel::after { content: ""; position: absolute; bottom: 0; width: 140px; height: 8px;
+  background: #e58411; border-radius: 999px;
+  animation: hsb-move linear both; animation-timeline: --trk; }
+@keyframes hsb-move { to { left: calc(100% - 140px); } }</pre>
+
+  <h3>7.5 Burger menu without JavaScript</h3>
+  <p>A hidden checkbox stores the menu state. The label is the burger button and the sibling selector shows the menu under 900&nbsp;px. The three bars turn into an "X" with CSS transforms.</p>
+<pre>&lt;input type="checkbox" id="navCheck" class="nav-check"&gt;
+&lt;label for="navCheck" class="nav-toggle"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/label&gt;
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .nav-check:checked ~ .nav { display: flex; }
+}</pre>
+
+  <h3>7.6 One header and one footer for all pages</h3>
+  <p>The secondary pages reuse the home page markup. A small modifier makes the header permanently white because these pages start with a light background instead of a dark photo.</p>
+<pre>.site-header.is-solid { position: fixed; animation: none;
+  background: rgba(255,255,255,.96); color: var(--ink); }
+.site-header.is-solid .chev, .site-header.is-solid .bag { filter: invert(1); }</pre>
+
+  <h3>7.7 Add-to-cart button and design tokens</h3>
+  <p>The "+" button is a checkbox + label: when checked it turns from navy to orange. Colours and sizes come from variables (<code>--orange</code>, <code>--navy</code>, <code>--gutter</code>), which the media queries override (for example <code>--gutter: 80px</code> on desktop, <code>48px</code> on laptops, <code>24px</code> on phones).</p>
+</section>
+
+<!-- ============================ 8 ============================ -->
+<section>
+  <h2><span class="n">08</span>Responsive design and accessibility</h2>
+  <table>
+    <tr><th style="width:24%">Breakpoint</th><th>What changes</th></tr>
+    <tr><td>≤ 1280 px</td><td>Smaller gutters and section spacing, fluid hero title with <code>clamp()</code>, "Why pick us" in three columns, footer grid adapts.</td></tr>
+    <tr><td>≤ 1180 px</td><td>Carousels show three then two cards; product grid in three columns.</td></tr>
+    <tr><td>≤ 1024 px</td><td>Secondary hero columns get closer, titles shrink to 44 px.</td></tr>
+    <tr><td>≤ 900 px</td><td>Burger menu, hotspots hidden, one-column layouts, two-column product grid, statistics in 2×2.</td></tr>
+    <tr><td>≤ 480 px</td><td>Single-column product grid, tabs fill the width.</td></tr>
+  </table>
+  <ul>
+    <li>Fluid units (<code>clamp()</code>, percentages, <code>aspect-ratio</code>) avoid fixed heights that would break on small screens.</li>
+    <li>Images have <code>alt</code> text; purely decorative images use <code>alt=""</code>.</li>
+    <li>Visible hover and focus states; the add-to-cart buttons are real form controls usable with the keyboard.</li>
+    <li><code>prefers-reduced-motion</code> turns off smooth scrolling and the pulse animation for users who ask for less motion.</li>
+  </ul>
+</section>
+
+<!-- ============================ 9 ============================ -->
+<section>
+  <h2><span class="n">09</span>Testing and compatibility</h2>
+  <p>Each of the five pages was checked in Chromium at three widths (1440, 820 and 390&nbsp;px): no missing file, no horizontal scrolling, header and footer identical on every page.</p>
+  <table>
+    <tr><th style="width:36%">Feature</th><th>Chrome / Edge</th><th>Firefox / Safari</th></tr>
+    <tr><td>Layout, Grid, Flexbox, tabs (<code>:has()</code>)</td><td>Supported</td><td>Supported (recent versions)</td></tr>
+    <tr><td>Scroll-snap carousels</td><td>Supported</td><td>Supported</td></tr>
+    <tr><td>Sticky header animation</td><td>Supported</td><td>Falls back to the plain header</td></tr>
+    <tr><td>Orange page and carousel scrollbars</td><td>Supported</td><td>Not drawn (scrolling still works)</td></tr>
+  </table>
+  <div class="callout"><p><b>Known limitation.</b> Scroll-driven animations are not yet available in every browser. In those browsers the native scrollbar is hidden and the orange bar is not drawn, so the page scrolls normally but without a visible indicator. A possible improvement is to hide the native scrollbar only inside an <code>@supports (animation-timeline: scroll())</code> block.</p></div>
+</section>
+
+<!-- ============================ 10 ============================ -->
+<section>
+  <h2><span class="n">10</span>Performance, SEO and sharing</h2>
+  <ul>
+    <li>Every page has a unique <code>title</code>, a <code>description</code>, a theme colour and favicons.</li>
+    <li><b>Open Graph</b> and Twitter card tags (<code>og:title</code>, <code>og:description</code>, <code>og:url</code>, <code>og:image</code> 1200×630 …) give a rich preview when the link is shared.</li>
+    <li>Scripts: none. Fonts use <code>font-display: swap</code>; external fonts use <code>preconnect</code>.</li>
+    <li><b>Point to improve:</b> the product images are large PNG files (several MB each). Resizing them and converting to WebP would greatly reduce the loading time.</li>
+  </ul>
+</section>
+
+<!-- ============================ 11 ============================ -->
+<section>
+  <h2><span class="n">11</span>Deployment on GitHub Pages</h2>
+  <ol>
+    <li>Create a public repository and upload the project folder, keeping <code>index.html</code> at the root.</li>
+    <li>Open <b>Settings → Pages</b>, choose <b>Deploy from a branch</b>, branch <code>main</code>, folder <code>/ (root)</code>, then Save.</li>
+    <li>After a minute the site is online at <code>https://&lt;user&gt;.github.io/&lt;repository&gt;/</code>.</li>
+    <li>Replace the placeholder address in the Open Graph tags (<code>og:url</code>, <code>og:image</code>, <code>canonical</code>) with this real address.</li>
+  </ol>
+  <p>Because all paths are relative, no other change is needed.</p>
+</section>
+
+<!-- ============================ 12 ============================ -->
+<section>
+  <h2><span class="n">12</span>Challenges and solutions</h2>
+  <table>
+    <tr><th style="width:36%">Challenge</th><th>Solution</th></tr>
+    <tr><td>Interactive tabs without JavaScript</td><td>Hidden radio inputs + the <code>:has()</code> selector.</td></tr>
+    <tr><td>Header that adapts to scrolling</td><td>CSS scroll-driven animations with <code>@supports</code> so older browsers still work.</td></tr>
+    <tr><td>Branded scrollbar that overlays the page</td><td>Hide the native bar and animate a fixed pseudo-element along the scroll timeline.</td></tr>
+    <tr><td>Progress bar under each carousel</td><td><code>scroll-timeline</code> on the track + <code>timeline-scope</code> on the container.</td></tr>
+    <tr><td>Four pages with their own stylesheets and a different header/footer</td><td>One stylesheet, shared markup, a single <code>.is-solid</code> modifier and renamed classes to avoid clashes (<code>.feature</code> → <code>.info-card</code>).</td></tr>
+    <tr><td>Complex image compositions on small screens</td><td>Absolute positioning on desktop, switched to a clean grid on tablet and phone.</td></tr>
+  </table>
+</section>
+
+<!-- ============================ 13 ============================ -->
+<section>
+  <h2><span class="n">13</span>Conclusion and future work</h2>
+  <p>The project reaches its goals: a fast, accessible and fully responsive five-page website that matches the design, written with a single stylesheet, shared header and footer, and no JavaScript. It strengthened our skills in modern CSS, responsive design, code organisation and teamwork with Git.</p>
+  <ul>
+    <li>Add a real shopping cart (JavaScript) and a working search.</li>
+    <li>Add product detail pages and a contact page.</li>
+    <li>Compress images (WebP) and add lazy loading.</li>
+    <li>Make the scrollbar fallback work in every browser.</li>
+    <li>Add dark mode and a French / Arabic version.</li>
+  </ul>
+</section>
+
+<!-- ============================ 14 ============================ -->
+<section>
+  <h2><span class="n">14</span>References</h2>
+  <ul>
+    <li>MDN Web Docs – CSS scroll-driven animations, <code>:has()</code>, scroll snap – developer.mozilla.org</li>
+    <li>CSS-Tricks – "The checkbox hack", Flexbox and Grid guides – css-tricks.com</li>
+    <li>GitHub Docs – "Creating a GitHub Pages site" – docs.github.com/pages</li>
+    <li>The Open Graph protocol – ogp.me</li>
+    <li>Can I use – browser support tables – caniuse.com</li>
+  </ul>
+  <p class="note">Team: [ Your name ] · [ Colleague 1 ] · [ Colleague 2 ] — Module: Web Development — 2026 / 2027.</p>
+</section>
+
+</body>
+</html>

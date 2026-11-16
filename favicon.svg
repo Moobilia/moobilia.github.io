@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Moobilia">
+  <style>
+    :root{--bg:#faf3ea;--ink:#3a2418;--accent:#b97a45}
+    @media (prefers-color-scheme:dark){:root{--bg:#2a1b13;--ink:#faf3ea;--accent:#e0a36c}}
+    .seat{transform-origin:32px 51px;animation:seat 3.2s ease-in-out infinite}
+    @keyframes seat{0%,100%{transform:scaleX(.55);opacity:.75}50%{transform:scaleX(1);opacity:1}}
+    @media (prefers-reduced-motion:reduce){.seat{animation:none}}
+  </style>
+  <rect width="64" height="64" rx="15" fill="var(--bg)"/>
+  <!-- M built from two rounded arches (the double "o"), like two chair backs -->
+  <g transform="translate(0 -3)"><path d="M17 41V28a7.5 7.5 0 0 1 15 0 7.5 7.5 0 0 1 15 0v13" fill="none" stroke="var(--ink)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- seat line -->
+  <path class="seat" d="M15 51h34" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/></g>
+</svg>
